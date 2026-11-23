@@ -1,0 +1,55 @@
+/* Zarzinova Academy — styles communs à toutes les pages
+   VOICE: institutionnel mais lumineux — une académie jeune, sérieuse, fière de Zarzis.
+   IDEA: l'ampoule-cerveau du logo et ses rayons fins — « Born in Zarzis, built to shine ».
+   PICTURE: l'ampoule-cerveau en grand dans le hero, vignettes illustrées par formation, photos de l'espace.
+   COLOUR and TYPE: couleurs exactes du logo — bleu ciel #87CEEB, or #D6CC74, trait noir — + indigo nuit pour le contraste ; Space Mono (typo du logo) + Poppins + Cairo (arabe).
+   LAYOUT: navbar sticky, bandes pleine largeur, contenu max 1240px, footer indigo nuit. */
+:root{color-scheme:light dark;
+  --bg:light-dark(#ffffff,#0b1030);--ink:light-dark(#141b45,#eef2ff);--soft:light-dark(#4b5578,#a9b3d6);
+  --card:light-dark(#ffffff,#121a44);--mist:light-dark(#f2f6fb,#0f1638);--line:light-dark(#dfe7f1,#232d63);
+  --indigo:light-dark(#1f2a6b,#2a3790);--skydeep:light-dark(#2b8fbf,#87ceeb);--emerald:light-dark(#0e9f6e,#34d399);
+  --goldtext:light-dark(#7a6e16,#d6cc74)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Poppins,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{text-wrap:balance;line-height:1.1}
+[lang=ar]{font-family:Cairo,"Noto Kufi Arabic",Tahoma,sans-serif}
+:focus-visible{outline:3px solid var(--skydeep);outline-offset:3px;border-radius:8px}
+input,select,textarea{font-size:16px}
+.navlink[aria-current=page],.navlink[aria-current=true]{color:var(--skydeep)}
+.scroll{overflow-x:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+dialog::backdrop{background:rgba(11,16,48,.6);backdrop-filter:blur(3px)}
+
+/* Apparition au défilement */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* Accueil */
+.rays{transform-origin:300px 215px;animation:glow 4s ease-in-out infinite}
+@keyframes glow{50%{opacity:.55;transform:scale(1.04)}}
+.marquee{display:flex;width:max-content;animation:slide 32s linear infinite}
+.marquee:hover{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.pole,.course,.lift{transition:transform .3s ease,box-shadow .3s ease}
+.pole:hover,.course:hover,.lift:hover{transform:translateY(-6px);box-shadow:0 24px 48px -24px rgba(20,27,69,.45)}
+
+/* Catalogue */
+.course.enter{animation:pop .45s ease both}
+@keyframes pop{from{opacity:0;transform:translateY(14px)}}
+.chip[aria-pressed=true]{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+
+/* Photos à ajouter : le cadre illustré reste visible tant que l'image manque */
+.photo{position:relative;overflow:hidden}
+.photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Coche de confirmation des formulaires */
+.zn-check{stroke-dasharray:50;stroke-dashoffset:50;animation:zncheck .6s .15s ease forwards}
+@keyframes zncheck{to{stroke-dashoffset:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .rays,.marquee,.course.enter,.zn-check{animation:none}.zn-check{stroke-dashoffset:0}
+  .marquee{flex-wrap:wrap;width:auto}html{scroll-behavior:auto}
+  .pole,.course,.lift{transition:none}
+}
